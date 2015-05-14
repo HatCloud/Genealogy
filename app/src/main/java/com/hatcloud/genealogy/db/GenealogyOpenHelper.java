@@ -12,15 +12,15 @@ public class GenealogyOpenHelper extends SQLiteOpenHelper {
 
     public static String DB_NAME = "db_genealogy";
 
-    public static int VERSION = 1;
+    public static int VERSION = 3;
 
     public static final String CREATE_PERSON = "create table Person ("
-            + "_id integer primary key autoincrement"
-            + "name text"
-            + "sex integer"    //0:男性 1:女性
-            + "birth_date text"
-            + "death_date text"
-            + "family_id integer"
+            + "_id integer primary key autoincrement,"
+            + "name text,"
+            + "sex integer,"    //0:男性 1:女性
+            + "birth_date text,"
+            + "death_date text,"
+            + "family_id integer,"
             + "parent_id integer)";
 
 
@@ -47,6 +47,11 @@ public class GenealogyOpenHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
         switch (oldVersion) {
+            case 1:
+                db.execSQL("drop table if exists Person");
+                onCreate(db);
+                break;
+            default:
         }
 
     }

@@ -136,4 +136,17 @@ public class Person {
     public void setSex(int sex) {
         this.sex = sex;
     }
+
+    @Override
+    public String toString() {
+
+        if(!TextUtils.isEmpty(name)) {
+            return "Person [id=" + id + ", name=" + name + ", sex=" + sex + ", "
+                    + ", BirthDate=" + birthDate + ", DeathDate=" + deathDate
+                    + ", FamilyID=" + familyId + ", ParentID=" + parentId + "]";
+        }
+        else {
+            return "无";
+        }
+    }
 }
