@@ -71,9 +71,9 @@ public class Person {
         if (TextUtils.isEmpty(deathDate)) {
             Calendar calendar = Calendar.getInstance();
             int currentYear = calendar.YEAR;
-            return currentYear - getYear(birthDate);
+            return Math.abs(currentYear - getYear(birthDate));
         } else {
-            return getYear(deathDate) - getYear(birthDate);
+            return Math.abs(getYear(deathDate) - getYear(birthDate));
         }
     }
 

@@ -59,7 +59,7 @@ public class PersonDBUtilTest extends TestCase {
     public void testQueryByName() throws Exception {
         PersonDBUtil personDBUtil = PersonDBUtil.getIntance(MyApplication.getContext());
         Cursor cursor = personDBUtil.queryByName("张4");
-        List<Person> people = PersonDBUtil.getPeopleFromCursor(cursor);
+        List<Person> people = PersonDBUtil.cursorToPeople(cursor);
 
         Log.i(TAG, "---------------查找所有张4----------------------");
         for (Person person : people) {
@@ -79,7 +79,7 @@ public class PersonDBUtilTest extends TestCase {
     public void testGetAllPeople() throws Exception {
         PersonDBUtil personDBUtil = PersonDBUtil.getIntance(MyApplication.getContext());
         Cursor cursor = personDBUtil.getAllPeople();
-        List<Person> people = PersonDBUtil.getPeopleFromCursor(cursor);
+        List<Person> people = PersonDBUtil.cursorToPeople(cursor);
 
 
         Log.i(TAG, "---------------开始显示所有人信息---------------");
@@ -124,7 +124,7 @@ public class PersonDBUtilTest extends TestCase {
     public void testGetChildren() throws Exception {
         PersonDBUtil personDBUtil = PersonDBUtil.getIntance(MyApplication.getContext());
         Person parent = personDBUtil.find(5);
-        List<Person> children = PersonDBUtil.getPeopleFromCursor(personDBUtil.getChildren(parent));
+        List<Person> children = PersonDBUtil.cursorToPeople(personDBUtil.getChildren(parent));
 
         Log.i(TAG, "---------------查找张五的孩子-------------------");
         for (Person person : children) {
