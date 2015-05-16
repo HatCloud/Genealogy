@@ -1,6 +1,8 @@
 package com.hatcloud.genealogy.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -48,5 +50,10 @@ public class AllInfoActivity extends BaseActivity{
                 new int[] {R.id.id, R.id.name, R.id.age, R.id.sex, R.id.familyId, R.id.parentId });
 
         listView.setAdapter(adapter);
+    }
+
+    public void onClickAddItem(View view) {
+        Intent i = new Intent(this, AddItemActivity.class);
+        startActivity(i);
     }
 }

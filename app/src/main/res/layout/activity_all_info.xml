@@ -65,7 +65,14 @@
     </RelativeLayout>
     <ListView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:id="@+id/listView"
         />
+    <Button
+        android:id="@+id/addItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickAddItem"
+        android:text="添加"/>
 </LinearLayout>

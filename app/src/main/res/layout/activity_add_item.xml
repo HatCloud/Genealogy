@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名："
+            android:textSize="24sp"
+            android:layout_gravity="bottom"/>
+
+        <EditText
+            android:id="@+id/edit_name"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="horizontal">
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="8dp"
+            android:onClick="onCheckChangeMale"
+            android:text="男"
+            android:textSize="24sp"
+            android:id="@+id/cb_male" />
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onCheckChangeFeMale"
+            android:text="女"
+            android:textSize="24sp"
+            android:id="@+id/cb_female" />
+
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="出生日期："
+            android:textSize="24sp"
+            android:layout_gravity="bottom"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/edit_birth_date" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="死亡日期："
+            android:textSize="24sp"
+            android:layout_gravity="bottom"/>
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:inputType="date"
+            android:ems="10"
+            android:id="@+id/edit_death_date" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="家庭ID："
+            android:textSize="24sp"
+            android:layout_gravity="bottom"/>
+
+        <EditText
+            android:id="@+id/edit_family_id"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="16dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="父母家庭ID："
+            android:textSize="24sp"
+            android:layout_gravity="bottom"/>
+
+        <EditText
+            android:id="@+id/edit_parent_id"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_marginTop="32dp"
+        android:onClick="onClickSaveItem"
+        android:text="存储"
+        android:textSize="24sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+
+</LinearLayout>

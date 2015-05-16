@@ -42,6 +42,15 @@ public class Person {
         this.parentId = parentId;
     }
 
+    public Person(String name, int sex, String birthDate, String deathDate, int familyId, int parentId) {
+        this.name = name;
+        this.sex = sex;
+        this.birthDate = birthDate;
+        this.deathDate = deathDate;
+        this.familyId = familyId;
+        this.parentId = parentId;
+    }
+
     public Person(int id, String name, int sex, String birthDate, String deathDate, int familyId, int parentId) {
         this.id = id;
         this.name = name;
