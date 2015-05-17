@@ -43,6 +43,7 @@ public class AddItemActivity extends BaseActivity {
 
     public void onClickSaveItem(View view) {
         boolean isWrong = false;
+        String wrongInfo = new String();
         String name = nameEdit.getText().toString();
         int sex = maleCheckBox.isChecked() ? 1 : 2;
         String birthDate = birthDateEdit.getText().toString();
@@ -50,37 +51,34 @@ public class AddItemActivity extends BaseActivity {
         String strFamilyId = familyIdEdit.getText().toString();
         String strParentId = parentIdEdit.getText().toString();
 
+
         if (TextUtils.isEmpty(name) && !isWrong) {
-            Toast.makeText(MyApplication.getContext(), "姓名为空或填写错误！", Toast.LENGTH_SHORT).show();
+            wrongInfo += "姓名为空或填写错误！";
             isWrong = true;
         }
 
-        if (!StrUtil.isSex("" + sex)) {
-            Toast.makeText(MyApplication.getContext(), "性别为空！", Toast.LENGTH_SHORT).show();
-            isWrong = true;
-        }
 
         if (!StrUtil.isDate(birthDate)) {
-            Toast.makeText(MyApplication.getContext(), "出生日期为空或出错", Toast.LENGTH_SHORT).show();
+            wrongInfo += "\n出生日期为空或出错";
             isWrong = true;
         }
 
         if (StrUtil.isEmpty(deathDate) && !isWrong) {
             deathDate = "";
         } else if (!StrUtil.isDate(deathDate) && !isWrong ){
-            Toast.makeText(MyApplication.getContext(), "死亡日期出错", Toast.LENGTH_SHORT).show();
+            wrongInfo += "\n死亡日期出错";
             isWrong = true;
         }
 
         if (StrUtil.isEmpty(strFamilyId) && !isWrong) {
             strFamilyId = "0";
         } else if (!StrUtil.isNum(strFamilyId) && !isWrong ){
-            Toast.makeText(MyApplication.getContext(), "家庭编号必须是数字", Toast.LENGTH_SHORT).show();
+            wrongInfo += "\n家庭编号必须是数字";
             isWrong = true;
         }
 
         if (!StrUtil.isNum(strParentId)) {
-            Toast.makeText(MyApplication.getContext(), "父母编号为空或出错", Toast.LENGTH_SHORT).show();
+            wrongInfo += "\n父母编号为空或出错";
             isWrong = true;
         }
 
@@ -92,17 +90,25 @@ public class AddItemActivity extends BaseActivity {
             personDBUtil.save(person);
             Intent i = new Intent(AddItemActivity.this, AllInfoActivity.class);
             startActivity(i);
+        } else {
+            Toast.makeText(MyApplication.getContext(), wrongInfo, Toast.LENGTH_SHORT).show();
         }
 
     }
 
     public void onCheckChangeMale(View view) {
+        if(!femaleCheckBox.isChecked()){
+            maleCheckBox.setChecked(true);
+        }
         if (maleCheckBox.isChecked()) {
             femaleCheckBox.setChecked(false);
         }
     }
 
     public void onCheckChangeFeMale(View view) {
+        if(!maleCheckBox.isChecked()){
+            femaleCheckBox.setChecked(true);
+        }
         if(femaleCheckBox.isChecked()) {
             maleCheckBox.setChecked(false);
         }

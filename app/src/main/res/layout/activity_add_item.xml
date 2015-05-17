@@ -19,6 +19,7 @@
 
         <EditText
             android:id="@+id/edit_name"
+            android:hint="必填"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content" />
@@ -39,6 +40,7 @@
             android:onClick="onCheckChangeMale"
             android:text="男"
             android:textSize="24sp"
+            android:checked="true"
             android:id="@+id/cb_male" />
 
         <CheckBox
@@ -67,6 +69,7 @@
             android:layout_gravity="bottom"/>
 
         <EditText
+            android:hint="必填"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
@@ -135,6 +138,7 @@
             android:layout_gravity="bottom"/>
 
         <EditText
+            android:hint="必填"
             android:id="@+id/edit_parent_id"
             android:layout_width="0dp"
             android:layout_weight="1"

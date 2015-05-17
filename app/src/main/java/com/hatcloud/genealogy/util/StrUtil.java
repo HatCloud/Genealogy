@@ -24,7 +24,7 @@ public class StrUtil {
     }
 
     public static boolean isNum(String str){
-        Pattern pattern = Pattern.compile("^[\\d]*$");
+        Pattern pattern = Pattern.compile("^\\d[\\d]*$");
         return pattern.matcher(str).matches();
     }
 
