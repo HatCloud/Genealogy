@@ -3,6 +3,7 @@ package com.hatcloud.genealogy.activity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 
 import com.hatcloud.genealogy.util.LogUtil; //改成当前项目的包名
@@ -12,7 +13,7 @@ import com.hatcloud.genealogy.util.LogUtil; //改成当前项目的包名
  * 这是本项目中所有Activity的基类
  * 通过该类能在调试过程中知晓现在在那哪一个活动
  */
-public class BaseActivity extends Activity{
+public class BaseActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

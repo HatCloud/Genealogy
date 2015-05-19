@@ -21,6 +21,10 @@
 
         <activity android:name=".activity.AddItemActivity" />
 
+        <activity android:name=".activity.PersonInfoActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activity.AllInfoActivity"/>
+
     </application>
 
 </manifest>

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/page_top_padding"
+    android:paddingBottom="@dimen/page_bottom_padding"
+    android:paddingLeft="@dimen/page_left_padding"
+    android:paddingRight="@dimen/page_right_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textColor="@color/page_text"
+            android:textSize="@dimen/text_medium"/>
+
+        <TextView
+            android:id="@+id/person_name"
+            android:paddingLeft="@dimen/space"
+            android:textSize="@dimen/text_medium"
+            android:text="孔子"
+            android:textColor="@color/page_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sex"
+            android:textColor="@color/page_text"
+            android:textSize="@dimen/text_medium"/>
+
+        <TextView
+            android:id="@+id/person_sex"
+            android:paddingLeft="@dimen/space"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/page_text"
+            android:text="男"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/age"
+            android:textColor="@color/page_text"
+            android:textSize="@dimen/text_medium"/>
+
+        <TextView
+            android:id="@+id/person_age"
+            android:paddingLeft="@dimen/space"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/page_text"
+            android:text="72"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:paddingTop="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/birth_to_death"
+            android:textColor="@color/page_text"
+            android:textSize="@dimen/text_medium"/>
+
+        <TextView
+            android:id="@+id/person_birth_to_death"
+            android:paddingLeft="@dimen/space"
+            android:textSize="@dimen/text_medium"
+            android:textColor="@color/page_text"
+            android:text="前511 ~ 前479"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:paddingTop="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/life"
+            android:textColor="@color/page_text"
+            android:textSize="24sp"/>
+
+
+        <TextView
+            android:id="@+id/person_life"
+            android:padding="@dimen/space"
+            android:textSize="@dimen/text_medium"
+            android:text="无"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+    </LinearLayout>
+
+</LinearLayout>
+
+</ScrollView>

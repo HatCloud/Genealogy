@@ -2,6 +2,8 @@ package com.hatcloud.genealogy.model;
 
 import android.text.TextUtils;
 
+import com.hatcloud.genealogy.util.StrUtil;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -68,7 +70,9 @@ public class Person {
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
             date = simpleDateFormat.parse(dateStr);
-            year = date.getYear();
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            year = calendar.get(Calendar.YEAR);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -77,9 +81,9 @@ public class Person {
 
     public int getAge() {
 
-        if (TextUtils.isEmpty(deathDate)) {
+        if (StrUtil.isEmpty(deathDate)) {
             Calendar calendar = Calendar.getInstance();
-            int currentYear = calendar.YEAR;
+            int currentYear = calendar.get(Calendar.YEAR);
             return Math.abs(currentYear - getYear(birthDate));
         } else {
             return Math.abs(getYear(deathDate) - getYear(birthDate));
@@ -102,11 +106,24 @@ public class Person {
         return sex;
     }
 
+    public String getSexStr() {
+        if (sex == 1) {
+            return "男";
+        } else if(sex == 2) {
+            return "女";
+        }
+
+        return "未知";
+    }
+
     public String getBirthDate() {
         return birthDate;
     }
 
     public String getDeathDate() {
+        if (StrUtil.isEmpty(deathDate)) {
+            return "";
+        }
         return deathDate;
     }
 
@@ -157,5 +174,22 @@ public class Person {
         else {
             return "无";
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        Person p = (Person) o;
+        if (name.equals(p.getName())
+                && sex == p.getSex()
+                && birthDate.equals(p.getBirthDate())
+                && deathDate.equals(p.getDeathDate())
+                && familyId == p.getFamilyId()
+                && parentId == p.getParentId()) {
+            return true;
+        } else {
+            return false;
+        }
+
+
     }
 }

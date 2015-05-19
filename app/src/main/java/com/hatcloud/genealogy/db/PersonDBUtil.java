@@ -59,7 +59,16 @@ public class PersonDBUtil {
      * @param person 存储的条目
      */
     public void save(Person person) {
-        if (person != null) {
+
+        boolean flag = true;
+        List<Person> people = cursorToPeople(queryByName(person.getName()));
+        for (Person p : people) {
+            if (p.equals(person)) {
+                flag = false;
+            }
+        }
+
+        if (person != null && flag) {
             ContentValues values = new ContentValues();
             values.put("name", person.getName());
             values.put("sex", person.getSex());
@@ -195,7 +204,12 @@ public class PersonDBUtil {
         Cursor cursor = db.query("Person", allColumn,"family_id=? and sex=?"
                 , new String[]{String.valueOf(child.getParentId()), String.valueOf(1)}
                 , null, null, null);
-        return cursorToPeople(cursor).get(0);
+        if (cursor.getCount() != 0) {
+            return cursorToPeople(cursor).get(0);
+        } else {
+            return null;
+        }
+
     }
 
     /**
@@ -207,7 +221,11 @@ public class PersonDBUtil {
         Cursor cursor = db.query("Person", allColumn,"family_id=? and sex=?"
                 , new String[]{String.valueOf(child.getParentId()), String.valueOf(2)}
                 , null, null, null);
-        return cursorToPeople(cursor).get(0);
+        if (cursor.getCount() != 0) {
+            return cursorToPeople(cursor).get(0);
+        } else {
+            return null;
+        }
     }
 
     /**
