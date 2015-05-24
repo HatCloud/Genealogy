@@ -1,12 +1,10 @@
 package com.hatcloud.genealogy.activity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 
-import com.hatcloud.genealogy.util.LogUtil; //改成当前项目的包名
+import android.support.v7.app.ActionBarActivity;
+
+import com.hatcloud.genealogy.util.LogUtil;
 
 /**
  * Created by Jeff on 15/4/28.

@@ -1,7 +1,12 @@
 package com.hatcloud.genealogy.activity;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -33,8 +38,8 @@ public class AllInfoActivity extends BaseActivity {
         List<Person> people = PersonDBUtil.cursorToPeople(personDBUtil.getAllPeople());
 
 
-        //personDBUtil.deleteAll();
-        //importTestData();
+//        personDBUtil.deleteAll();
+//        importTestData();
 
         for (Person person : people) {
             HashMap<String, String> p = new HashMap<>();
@@ -71,6 +76,42 @@ public class AllInfoActivity extends BaseActivity {
             PersonInfoActivity.actionStart(AllInfoActivity.this, personid);
         }
     }
+
+    @Override
+
+    public
+    boolean
+    onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actionbar, menu);
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+
+        //set up the query listener
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                //start the search intent
+                Intent searchIntent = new Intent(AllInfoActivity.this, SearchResultsActivity.class);
+                searchIntent.setAction(Intent.ACTION_SEARCH);
+                searchIntent.putExtra(SearchManager.QUERY, query);
+                startActivity(searchIntent);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String query) {
+                //do nothing in our case
+                return true;
+            }
+        });
+
+        return true;
+
+    }
+
+
 
     private void importTestData() {
         PersonDBUtil personDBUtil = PersonDBUtil.getIntance(MyApplication.getContext());

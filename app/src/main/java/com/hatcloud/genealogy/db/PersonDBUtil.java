@@ -146,19 +146,21 @@ public class PersonDBUtil {
     }
 
     /**
-     * 按名字查找人
+     * 按名字查找人，使用的是模糊匹配，会返回所有匹配到包含关键字的人的Cursor
      * @param name 所查找人的姓名
-     * @return 返回的是一个Cursor，提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
+     * @return 返回所有匹配到名字里包含关键字的人的Cursor，
+     * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
      */
     public Cursor queryByName(String name) {
-        return db.query("Person", allColumn, "name = ?", new String[]{name},
+        return db.query("Person", allColumn, "name like ?", new String[]{"%" + name + "%"},
                 null,null,null);
     }
 
     /**
      * 根据familyId来查找一对夫妇
      * @param familyId 家庭编号，一对夫妇的家庭编号是一致的
-     * @return 返回的是一个Cursor，提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
+     * @return 返回的是一个Cursor，
+     * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
      */
     public Cursor queryByFamilyId(int familyId) {
         return db.query("Person", allColumn, "family_id", new String[]{String.valueOf(familyId)},
@@ -168,7 +170,8 @@ public class PersonDBUtil {
     /**
      * 根据parentId来查找某个家庭的孩子们
      * @param parentId 父母的家庭编号
-     * @return 返回的是一个Cursor，提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
+     * @return 返回的是一个Cursor，
+     * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
      */
     public Cursor queryByParentId(int parentId){
         return db.query("Person", allColumn, "parent_id", new String[]{String.valueOf(parentId)},
@@ -177,7 +180,8 @@ public class PersonDBUtil {
 
     /**
      * 获取Person表中所有的数据
-     * @return 返回的是一个Cursor，提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
+     * @return 返回的是一个Cursor，
+     * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
      */
     public Cursor getAllPeople() {
         return db.rawQuery("select * from Person", null);
@@ -231,7 +235,8 @@ public class PersonDBUtil {
     /**
      * 获取某个人所有的孩子
      * @param parent 要查找孩子的某个父母的Person实例
-     * @return 返回的是一个查找到的所有孩子条目的Cursor实例，提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
+     * @return 返回的是一个查找到的所有孩子条目的Cursor实例，
+     * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
      */
     public Cursor getChildren(Person parent) {
         Cursor cursor = db.query("Person", allColumn, "parent_id=?", new String[]{String.valueOf(parent.getFamilyId())}
