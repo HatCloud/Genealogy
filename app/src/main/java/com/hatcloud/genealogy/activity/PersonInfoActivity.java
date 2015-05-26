@@ -36,11 +36,9 @@ public class PersonInfoActivity extends BaseActivity {
 
         person = personDBUtil.find(id);
 
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().setTitle(person.getName());
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        toolbar.setTitle(person.getName());
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add(R.string.general, PersonGeneralInfo.class)

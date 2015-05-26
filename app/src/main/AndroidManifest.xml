@@ -4,7 +4,7 @@
 
 
     <application
-        android:name=".util.MyApplication"
+        android:name="com.hatcloud.genealogy.util.MyApplication"
         android:allowBackup="true"
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
@@ -24,8 +24,8 @@
 
         <activity android:name=".activity.AddItemActivity" />
 
-        <activity android:name=".activity.PersonInfoActivity"
-            android:theme="@style/AppTheme.NoActionBar"
+        <activity
+            android:name=".activity.PersonInfoActivity"
             android:parentActivityName=".activity.AllInfoActivity"/>
 
         <activity android:name=".activity.SearchResultsActivity">

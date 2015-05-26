@@ -2,16 +2,38 @@
 
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
         <item name="colorPrimary">@color/primary</item>
+        <!--   darker variant for the status bar and contextual app bars -->
         <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/accent</item>
+        <item name="android:windowBackground">@color/window_background</item>
     </style>
 
 
-    <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimary">@color/primary</item>
-        <item name="colorPrimaryDark">@color/primary_dark</item>
-        <item name="colorAccent">@color/accent</item>
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <!-- Both of these are needed -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    
+    <style name="NormalText">
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="LagerText">
+        <item name="android:textSize">@dimen/text_large</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="PagePadding">
+        <item name="android:paddingTop">@dimen/lager_padding</item>
+        <item name="android:paddingBottom">@dimen/lager_padding</item>
+        <item name="android:paddingLeft">@dimen/normal_padding</item>
+        <item name="android:paddingRight">@dimen/normal_padding</item>
     </style>
 
 

@@ -1,11 +1,16 @@
 <resources>
-    <dimen name="tab_height">48dp</dimen>
-    <dimen name="page_top_padding">32dp</dimen>
-    <dimen name="page_bottom_padding">32dp</dimen>
-    <dimen name="page_left_padding">16dp</dimen>
-    <dimen name="page_right_padding">16dp</dimen>
+
+    <!--空间大小-->
+    <dimen name="widget_height">48dp</dimen>
+
+    <!--控件间隔-->
+    <dimen name="lager_padding">32dp</dimen>
+    <dimen name="normal_padding">16dp</dimen>
     <dimen name="space">8dp</dimen>
-    
-    <dimen name="text_medium">20sp</dimen>
-    <dimen name="text_big">24sp</dimen>
+
+    <!--字体大小-->
+    <dimen name="text_micro">12sp</dimen>
+    <dimen name="text_small">14sp</dimen>
+    <dimen name="text_normal">18sp</dimen>
+    <dimen name="text_large">22sp</dimen>
 </resources>

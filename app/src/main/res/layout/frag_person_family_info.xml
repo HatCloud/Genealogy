@@ -1,86 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/page_background"
-    android:paddingTop="@dimen/page_top_padding"
-    android:paddingBottom="@dimen/page_bottom_padding"
-    android:paddingLeft="@dimen/page_left_padding"
-    android:paddingRight="@dimen/page_right_padding">
+    android:orientation="vertical"
+    style="@style/PagePadding"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/father"
-            android:textColor="@color/page_text"
-            android:textSize="@dimen/text_medium"/>
+            style="@style/NormalText"
+            />
 
 
         <TextView
             android:id="@+id/father"
-            android:paddingLeft="@dimen/space"
-            android:textSize="@dimen/text_medium"
-            android:textColor="@color/page_text"
-            android:clickable="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/space"
+            android:clickable="true"
+            style="@style/NormalText"
+            />
 
     </LinearLayout>
 
     <LinearLayout
-        android:paddingTop="16dp"
+        android:paddingTop="@dimen/normal_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mother"
-            android:textColor="@color/page_text"
-            android:textSize="@dimen/text_medium"/>
+            style="@style/NormalText"
+            />
 
 
         <TextView
             android:id="@+id/mother"
-            android:paddingLeft="@dimen/space"
-            android:textSize="@dimen/text_medium"
-            android:textColor="@color/page_text"
-            android:clickable="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/space"
+            android:clickable="true"
+            style="@style/NormalText"
+            />
 
     </LinearLayout>
 
     <LinearLayout
-        android:paddingTop="16dp"
+        android:paddingTop="@dimen/lager_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        >
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/children"
-            android:textColor="@color/page_text"
-            android:textSize="@dimen/text_medium"/>
+            android:clickable="true"
+            style="@style/LagerText"
+            />
 
 
         <ListView
             android:id="@+id/children"
-            android:paddingLeft="@dimen/space"
-            android:textSize="@dimen/text_medium"
-            android:textColor="@color/page_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/space"
+            android:clickable="true"
+            />
 
     </LinearLayout>
 

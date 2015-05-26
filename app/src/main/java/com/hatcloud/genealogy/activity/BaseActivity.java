@@ -2,7 +2,7 @@ package com.hatcloud.genealogy.activity;
 
 import android.os.Bundle;
 
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 
 import com.hatcloud.genealogy.util.LogUtil;
 
@@ -11,7 +11,7 @@ import com.hatcloud.genealogy.util.LogUtil;
  * 这是本项目中所有Activity的基类
  * 通过该类能在调试过程中知晓现在在那哪一个活动
  */
-public class BaseActivity extends ActionBarActivity {
+public class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
