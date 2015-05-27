@@ -38,8 +38,8 @@ public class AllInfoActivity extends BaseActivity {
         List<Person> people = PersonDBUtil.cursorToPeople(personDBUtil.getAllPeople());
 
 
-//        personDBUtil.deleteAll();
-//        importTestData();
+        //personDBUtil.deleteAll();
+        importTestData();
 
         for (Person person : people) {
             HashMap<String, String> p = new HashMap<>();
@@ -48,8 +48,8 @@ public class AllInfoActivity extends BaseActivity {
             p.put("name", person.getName());
             p.put("age",String.valueOf(person.getAge()));
             p.put("sex", sex);
-            p.put("family_id", String.valueOf(person.getFamilyId()));
-            p.put("parent_id", String.valueOf(person.getParentId()));
+            p.put("father_id", String.valueOf(person.getFatherId()));
+            p.put("mother_id", String.valueOf(person.getMotherId()));
             data.add(p);
         }
 
@@ -116,8 +116,8 @@ public class AllInfoActivity extends BaseActivity {
     private void importTestData() {
         PersonDBUtil personDBUtil = PersonDBUtil.getIntance(MyApplication.getContext());
 
-        Person person1 = new Person("田日天", 1, "1950-4-5", "2010-5-7", 1, -1);
-        Person person2 = new Person("林绿华", 2, "1951-7-23", "1993-7-2", 1, -1);
+        Person person1 = new Person("田", "日天", 1, 1, "1950-4-5");
+        /*Person person2 = new Person("林绿华", 2, "1951-7-23", "1993-7-2", 1, -1);
         Person person3 = new Person("赵破劫", 1, "1943-6-1", "2004-1-2", 2, -1);
         Person person4 = new Person("王无烟", 2, "1941-6-8", "", 2, -1);
         Person person5 = new Person("田斩仙", 1, "1970-11-4", "", 3, 1);
@@ -127,10 +127,10 @@ public class AllInfoActivity extends BaseActivity {
         Person person9 = new Person("田血衣", 2, "1980-6-23", "", -2, 1);
         Person person10 = new Person("田傲天", 1, "2000-7-1", "", -2, 4);
         Person person11 = new Person("赵美丽", 2, "1965-2-5", "", -2, 2);
-        Person person12 = new Person("田浩", 1, "1992-3-1", "", -2, 3);
+        Person person12 = new Person("田浩", 1, "1992-3-1", "", -2, 3);*/
 
         personDBUtil.save(person1);
-        personDBUtil.save(person2);
+       /* personDBUtil.save(person2);
         personDBUtil.save(person3);
         personDBUtil.save(person4);
         personDBUtil.save(person5);
@@ -140,7 +140,7 @@ public class AllInfoActivity extends BaseActivity {
         personDBUtil.save(person9);
         personDBUtil.save(person10);
         personDBUtil.save(person11);
-        personDBUtil.save(person12);
+        personDBUtil.save(person12);*/
 
     }
 }

@@ -12,16 +12,24 @@ public class GenealogyOpenHelper extends SQLiteOpenHelper {
 
     public static String DB_NAME = "db_genealogy";
 
-    public static int VERSION = 3;
+    public static int VERSION = 7;
 
     public static final String CREATE_PERSON = "create table Person ("
             + "_id integer primary key autoincrement,"
-            + "name text,"
-            + "sex integer,"    //0:男性 1:女性
-            + "birth_date text,"
-            + "death_date text,"
-            + "family_id integer,"
-            + "parent_id integer)";
+            + "last_name text not null,"     //姓
+            + "first_name text not null,"    //名
+            + "name text,"           //姓名
+            + "used_name text,"     //曾用名
+            + "style_name text,"    //字
+            + "hao_name text,"      //号
+            + "sex integer not null,"        //0:男性 1:女性
+            + "family_hierarchy_position int,"  //辈分
+            + "father_id integer,"  //父亲
+            + "mother_id integer,"  //母亲
+            + "spouse_ids text,"     //配偶们
+            + "family_order int not null,"    //家中排号
+            + "birth_date text not null,"    //出生日期
+            + "death_date text)";   //死亡日期
 
 
     public GenealogyOpenHelper(Context context) {
@@ -46,13 +54,17 @@ public class GenealogyOpenHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        switch (oldVersion) {
+        db.execSQL("drop table if exists Person");
+        onCreate(db);
+        /*switch (oldVersion) {
             case 1:
                 db.execSQL("drop table if exists Person");
                 onCreate(db);
-                break;
+            case 3:
+                db.execSQL("drop table if exists Person");
+                onCreate(db);
             default:
-        }
+        }*/
 
     }
 }

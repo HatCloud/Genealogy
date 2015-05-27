@@ -14,53 +14,127 @@ import java.util.Date;
  */
 public class Person {
 
+    /**
+     * 数据库自动分配的ID
+     */
     private int id;
 
-    private String name;
+    /**
+     * 姓
+     * 不能为空
+     */
+    private String lastName;
 
     /**
-     * 1:男性 2:女性
+     * 名
+     * 不能为空
+     */
+    private String firstName;
+
+    /**
+     * 曾用名
+     */
+    private String usedName;
+
+    /**
+     * 字
+     */
+    private String styleName;
+
+    /**
+     * 号
+     */
+    private String haoName;
+
+    /**
+     * 性别：1:男性 2:女性
+     * 不能为空
      */
     private int sex;
 
+    /**
+     * 辈分
+     */
+    private int familyHierarchyPosition;
+
+    /**
+     * 父亲的ID
+     */
+    private int fatherId;
+
+    /**
+     * 母亲的ID
+     */
+    private int motherId;
+
+    /**
+     * 配偶们的ID
+     * 格式为"ID1,ID2,ID3"
+     */
+    private String spouseIds;
+
+    /**
+     * 在兄弟姐妹中的排行，老大的排号为1
+     * 独生子女的排号为1
+     * 不能为空
+     */
+    private int familyOrder;
+
+    /**
+     * 出生日期
+     * 格式为"YYYY-MM-DD"
+     * 不能为空
+     */
     private String birthDate;
 
+    /**
+     * 死亡日期
+     * 格式为"YYYY-MM-DD"
+     */
     private String deathDate;
 
     /**
-     * familyId是每个家庭的编号，一对夫妇为一个家庭
+     * 由姓和名组合的完整名字
      */
-    private int familyId;
+    private String name;
 
     /**
-     * parentId即父母的familyId
+     * 辈分较老的先祖的尊称
+     * 由 名 + “公” 组成
      */
-    private int parentId;
+    private String respectableName;
 
-    public Person(String name, int sex, String birthDate, int parentId) {
-        this.name = name;
+    public Person(String lastName, String firstName, int sex,
+                  int familyOrder, String birthDate) {
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.sex = sex;
+        this.familyOrder = familyOrder;
         this.birthDate = birthDate;
-        this.parentId = parentId;
+        this.name = lastName + firstName;
+        this.respectableName = firstName + "公";
     }
 
-    public Person(String name, int sex, String birthDate, String deathDate, int familyId, int parentId) {
-        this.name = name;
-        this.sex = sex;
-        this.birthDate = birthDate;
-        this.deathDate = deathDate;
-        this.familyId = familyId;
-        this.parentId = parentId;
-    }
-
-    public Person(int id, String name, int sex, String birthDate, String deathDate, int familyId, int parentId) {
+    public Person(int id, String lastName, String firstName, String usedName,
+                  String styleName, String haoName, int sex, int familyHierarchyPosition,
+                  int fatherId, int motherId, String spouseIds, int familyOrder,
+                  String birthDate, String deathDate) {
         this.id = id;
-        this.name = name;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.usedName = usedName;
+        this.styleName = styleName;
+        this.haoName = haoName;
         this.sex = sex;
+        this.familyHierarchyPosition = familyHierarchyPosition;
+        this.fatherId = fatherId;
+        this.motherId = motherId;
+        this.spouseIds = spouseIds;
+        this.familyOrder = familyOrder;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
-        this.familyId = familyId;
-        this.parentId = parentId;
+        this.name = lastName + firstName;
+        this.respectableName = firstName + "公";
     }
 
     public int getYear(String dateStr) {
@@ -127,12 +201,48 @@ public class Person {
         return deathDate;
     }
 
-    public int getFamilyId() {
-        return familyId;
+    public String getLastName() {
+        return lastName;
     }
 
-    public int getParentId() {
-        return parentId;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getUsedName() {
+        return usedName;
+    }
+
+    public String getStyleName() {
+        return styleName;
+    }
+
+    public String getHaoName() {
+        return haoName;
+    }
+
+    public int getFamilyHierarchyPosition() {
+        return familyHierarchyPosition;
+    }
+
+    public int getFatherId() {
+        return fatherId;
+    }
+
+    public int getMotherId() {
+        return motherId;
+    }
+
+    public String getSpouseIds() {
+        return spouseIds;
+    }
+
+    public int getFamilyOrder() {
+        return familyOrder;
+    }
+
+    public String getRespectableName() {
+        return respectableName;
     }
 
     public void setId(int id) {
@@ -147,20 +257,56 @@ public class Person {
         this.deathDate = deathDate;
     }
 
-    public void setFamilyId(int familyId) {
-        this.familyId = familyId;
+    public void setSex(int sex) {
+        this.sex = sex;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setUsedName(String usedName) {
+        this.usedName = usedName;
+    }
+
+    public void setStyleName(String styleName) {
+        this.styleName = styleName;
+    }
+
+    public void setHaoName(String haoName) {
+        this.haoName = haoName;
+    }
+
+    public void setFamilyHierarchyPosition(int familyHierarchyPosition) {
+        this.familyHierarchyPosition = familyHierarchyPosition;
+    }
+
+    public void setFatherId(int fatherId) {
+        this.fatherId = fatherId;
+    }
+
+    public void setMotherId(int motherId) {
+        this.motherId = motherId;
+    }
+
+    public void setSpouseIds(String spouseIds) {
+        this.spouseIds = spouseIds;
+    }
+
+    public void setFamilyOrder(int familyOrder) {
+        this.familyOrder = familyOrder;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setParentId(int parentId) {
-        this.parentId = parentId;
-    }
-
-    public void setSex(int sex) {
-        this.sex = sex;
+    public void setRespectableName(String respectableName) {
+        this.respectableName = respectableName;
     }
 
     @Override
@@ -169,7 +315,7 @@ public class Person {
         if(!TextUtils.isEmpty(name)) {
             return "Person [id=" + id + ", name=" + name + ", sex=" + sex + ", "
                     + ", BirthDate=" + birthDate + ", DeathDate=" + deathDate
-                    + ", FamilyID=" + familyId + ", ParentID=" + parentId + "]";
+                    + ", FatherID=" + fatherId + ", MotherID=" + motherId + "]";
         }
         else {
             return "无";
@@ -178,18 +324,47 @@ public class Person {
 
     @Override
     public boolean equals(Object o) {
-        Person p = (Person) o;
-        if (name.equals(p.getName())
-                && sex == p.getSex()
-                && birthDate.equals(p.getBirthDate())
-                && deathDate.equals(p.getDeathDate())
-                && familyId == p.getFamilyId()
-                && parentId == p.getParentId()) {
-            return true;
-        } else {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (familyHierarchyPosition != person.familyHierarchyPosition) return false;
+        if (familyOrder != person.familyOrder) return false;
+        if (fatherId != person.fatherId) return false;
+        if (id != person.id) return false;
+        if (motherId != person.motherId) return false;
+        if (sex != person.sex) return false;
+        if (!birthDate.equals(person.birthDate)) return false;
+        if (deathDate != null ? !deathDate.equals(person.deathDate) : person.deathDate != null)
             return false;
-        }
+        if (!firstName.equals(person.firstName)) return false;
+        if (haoName != null ? !haoName.equals(person.haoName) : person.haoName != null)
+            return false;
+        if (!lastName.equals(person.lastName)) return false;
+        if (name != null ? !name.equals(person.name) : person.name != null) return false;
+        if (respectableName != null ? !respectableName.equals(person.respectableName) : person.respectableName != null)
+            return false;
+        if (spouseIds != null ? !spouseIds.equals(person.spouseIds) : person.spouseIds != null)
+            return false;
+        if (styleName != null ? !styleName.equals(person.styleName) : person.styleName != null)
+            return false;
+        if (usedName != null ? !usedName.equals(person.usedName) : person.usedName != null)
+            return false;
 
+        return true;
+    }
 
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + lastName.hashCode();
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + sex;
+        result = 31 * result + familyHierarchyPosition;
+        result = 31 * result + fatherId;
+        result = 31 * result + familyOrder;
+        result = 31 * result + birthDate.hashCode();
+        return result;
     }
 }

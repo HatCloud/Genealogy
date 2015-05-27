@@ -82,7 +82,7 @@ public class AddItemActivity extends BaseActivity {
             isWrong = true;
         }
 
-        if (!isWrong) {
+        /*if (!isWrong) {
 
             Person person = new Person(name, sex, birthDate, deathDate
                     , Integer.valueOf(strFamilyId), Integer.valueOf(strParentId));
@@ -92,7 +92,7 @@ public class AddItemActivity extends BaseActivity {
             startActivity(i);
         } else {
             Toast.makeText(MyApplication.getContext(), wrongInfo, Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
     }
 

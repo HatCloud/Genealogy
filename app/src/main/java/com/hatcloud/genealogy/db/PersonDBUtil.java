@@ -17,22 +17,40 @@ public class PersonDBUtil {
 
     //数据库的所有列，为了方便rawQuerry()方法的使用
     private String[] allColumn = new String[]{
-            "_id", "name", "sex", "birth_date", "death_date", "family_id", "parent_id"};
+            "_id", "last_name", "first_name", "name", "used_name", "style_name",
+            "hao_name", "sex", "family_hierarchy_position", "father_id",
+            "mother_id", "spouse_ids", "family_order", "birth_date", "death_date"};
 
 
     public static final int ID = 0;
 
-    public static final int NAME = 1;
+    public static final int LAST_NAME = 1;
 
-    public static final int SEX = 2;
+    public static final int FIRST_NAME = 2;
 
-    public static final int BIRTH_DATE = 3;
+    public static final int NAME = 3;
 
-    public static final int DEATH_DATE = 4;
+    public static final int USED_NAME = 4;
 
-    public static final int FAMILY_ID = 5;
+    public static final int STYLE_NAME= 5;
 
-    public static final int PARENT_ID = 6;
+    public static final int HAO_NAME = 6;
+
+    public static final int SEX = 7;
+
+    public static final int FAMILY_HIERARCHY_POSITION = 8;
+
+    public static final int FATHER_ID = 9;
+
+    public static final int MOTHER_ID = 10;
+
+    public static final int SPOUSE_IDS = 11;
+
+    public static final int FAMILY_ORDER = 12;
+
+    public static final int BIRTH_DATE = 13;
+
+    public static final int DEATH_DATE = 14;
 
     private static PersonDBUtil personDBUtil;
 
@@ -70,12 +88,20 @@ public class PersonDBUtil {
 
         if (person != null && flag) {
             ContentValues values = new ContentValues();
+            values.put("last_name", person.getLastName());
+            values.put("first_name", person.getFirstName());
             values.put("name", person.getName());
+            values.put("used_name", person.getUsedName());
+            values.put("style_name", person.getStyleName());
+            values.put("hao_name", person.getHaoName());
             values.put("sex", person.getSex());
+            values.put("family_hierarchy_position", person.getFamilyHierarchyPosition());
+            values.put("father_id", person.getFatherId());
+            values.put("mother_id", person.getMotherId());
+            values.put("spouse_ids", person.getSpouseIds());
+            values.put("family_order", person.getFamilyOrder());
             values.put("birth_date", person.getBirthDate());
             values.put("death_date", person.getDeathDate());
-            values.put("family_id", person.getFamilyId());
-            values.put("parent_id", person.getParentId());
             db.insert("Person", null, values);
         }
     }
@@ -87,12 +113,20 @@ public class PersonDBUtil {
     public void update(Person person) {
         if (person != null) {
             ContentValues values = new ContentValues();
+            values.put("last_name", person.getLastName());
+            values.put("first_name", person.getFirstName());
             values.put("name", person.getName());
+            values.put("used_name", person.getUsedName());
+            values.put("style_name", person.getStyleName());
+            values.put("hao_name", person.getHaoName());
             values.put("sex", person.getSex());
+            values.put("family_hierarchy_position", person.getFamilyHierarchyPosition());
+            values.put("father_id", person.getFatherId());
+            values.put("mother_id", person.getMotherId());
+            values.put("spouse_ids", person.getSpouseIds());
+            values.put("family_order", person.getFamilyOrder());
             values.put("birth_date", person.getBirthDate());
             values.put("death_date", person.getDeathDate());
-            values.put("family_id", person.getFamilyId());
-            values.put("parent_id", person.getParentId());
             db.update("Person", values, "_id=?", new String[]{String.valueOf(person.getId())});
         }
     }
@@ -135,12 +169,19 @@ public class PersonDBUtil {
                 null, null, null);
         if (cursor.moveToNext()) {
             return new Person(cursor.getInt(ID),
-                    cursor.getString(NAME),
+                    cursor.getString(LAST_NAME),
+                    cursor.getString(FIRST_NAME),
+                    cursor.getString(USED_NAME),
+                    cursor.getString(STYLE_NAME),
+                    cursor.getString(HAO_NAME),
                     cursor.getInt(SEX),
+                    cursor.getInt(FAMILY_HIERARCHY_POSITION),
+                    cursor.getInt(FATHER_ID),
+                    cursor.getInt(MOTHER_ID),
+                    cursor.getString(SPOUSE_IDS),
+                    cursor.getInt(FAMILY_ORDER),
                     cursor.getString(BIRTH_DATE),
-                    cursor.getString(DEATH_DATE),
-                    cursor.getInt(FAMILY_ID),
-                    cursor.getInt(PARENT_ID));
+                    cursor.getString(DEATH_DATE));
         }
         return null;
     }
@@ -152,30 +193,29 @@ public class PersonDBUtil {
      * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
      */
     public Cursor queryByName(String name) {
-        return db.query("Person", allColumn, "name like ?", new String[]{"%" + name + "%"},
+        return db.query("Person", allColumn, "name like ?",
+                new String[]{"%" + name + "%"},
                 null,null,null);
     }
 
-    /**
-     * 根据familyId来查找一对夫妇
-     * @param familyId 家庭编号，一对夫妇的家庭编号是一致的
-     * @return 返回的是一个Cursor，
-     * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
-     */
-    public Cursor queryByFamilyId(int familyId) {
-        return db.query("Person", allColumn, "family_id", new String[]{String.valueOf(familyId)},
-                null,null,null);
-    }
 
     /**
-     * 根据parentId来查找某个家庭的孩子们
-     * @param parentId 父母的家庭编号
+     * 查找某人的孩子们
+     * @param parent 父母的实例
      * @return 返回的是一个Cursor，
      * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
      */
-    public Cursor queryByParentId(int parentId){
-        return db.query("Person", allColumn, "parent_id", new String[]{String.valueOf(parentId)},
-                null,null,null);
+    public Cursor getChildren(Person parent){
+
+        if(parent.getSex() == 1) {
+            return db.query("Person", allColumn, "father_id=?", new String[]{String.valueOf(parent.getId())},
+                    null, null, null);
+        }else if (parent.getSex() == 2) {
+            return db.query("Person", allColumn, "mother_id=?", new String[]{String.valueOf(parent.getId())},
+                    null, null, null);
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -205,8 +245,8 @@ public class PersonDBUtil {
      * @return 传入参数所代表的孩子的父亲的Person实例
      */
     public Person getFather(Person child) {
-        Cursor cursor = db.query("Person", allColumn,"family_id=? and sex=?"
-                , new String[]{String.valueOf(child.getParentId()), String.valueOf(1)}
+        Cursor cursor = db.query("Person", allColumn,"_id=?"
+                , new String[]{String.valueOf(child.getFatherId())}
                 , null, null, null);
         if (cursor.getCount() != 0) {
             return cursorToPeople(cursor).get(0);
@@ -222,8 +262,8 @@ public class PersonDBUtil {
      * @return 传入参数所代表的孩子的母亲的Person实例
      */
     public Person getMother(Person child) {
-        Cursor cursor = db.query("Person", allColumn,"family_id=? and sex=?"
-                , new String[]{String.valueOf(child.getParentId()), String.valueOf(2)}
+        Cursor cursor = db.query("Person", allColumn,"_id=?"
+                , new String[]{String.valueOf(child.getMotherId())}
                 , null, null, null);
         if (cursor.getCount() != 0) {
             return cursorToPeople(cursor).get(0);
@@ -232,17 +272,6 @@ public class PersonDBUtil {
         }
     }
 
-    /**
-     * 获取某个人所有的孩子
-     * @param parent 要查找孩子的某个父母的Person实例
-     * @return 返回的是一个查找到的所有孩子条目的Cursor实例，
-     * 提供给SimpleCursorAdapter使用,也可以使用DBUtil.cursorToPeople(Cursor cursor)方法来获取Person集合
-     */
-    public Cursor getChildren(Person parent) {
-        Cursor cursor = db.query("Person", allColumn, "parent_id=?", new String[]{String.valueOf(parent.getFamilyId())}
-                , null, null, null);
-        return cursor;
-    }
 
     /**
      * 因为应用中很多方法返回的都只是Cursor，不是具体的Person集合，
@@ -253,13 +282,20 @@ public class PersonDBUtil {
     public static List<Person> cursorToPeople(Cursor cursor) {
         List<Person> people = new ArrayList<Person>();
         while (cursor.moveToNext()) {
-            Person person = new Person(cursor.getInt(PersonDBUtil.ID),
-                    cursor.getString(PersonDBUtil.NAME),
-                    cursor.getInt(PersonDBUtil.SEX),
-                    cursor.getString(PersonDBUtil.BIRTH_DATE),
-                    cursor.getString(PersonDBUtil.DEATH_DATE),
-                    cursor.getInt(PersonDBUtil.FAMILY_ID),
-                    cursor.getInt(PersonDBUtil.PARENT_ID));
+            Person person = new Person(cursor.getInt(ID),
+                    cursor.getString(LAST_NAME),
+                    cursor.getString(FIRST_NAME),
+                    cursor.getString(USED_NAME),
+                    cursor.getString(STYLE_NAME),
+                    cursor.getString(HAO_NAME),
+                    cursor.getInt(SEX),
+                    cursor.getInt(FAMILY_HIERARCHY_POSITION),
+                    cursor.getInt(FATHER_ID),
+                    cursor.getInt(MOTHER_ID),
+                    cursor.getString(SPOUSE_IDS),
+                    cursor.getInt(FAMILY_ORDER),
+                    cursor.getString(BIRTH_DATE),
+                    cursor.getString(DEATH_DATE));
             people.add(person);
         }
         return people;
