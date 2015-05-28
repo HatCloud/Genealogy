@@ -15,7 +15,7 @@ import com.hatcloud.genealogy.model.Person;
 /**
  * Created by Jeff on 15/5/17.
  */
-public class PersonGeneralInfo extends Fragment{
+public class PersonGeneralInfoFragment extends Fragment{
 
     private View view;
     private TextView tvPersonName;

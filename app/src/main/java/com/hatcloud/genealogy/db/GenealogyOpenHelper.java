@@ -12,7 +12,7 @@ public class GenealogyOpenHelper extends SQLiteOpenHelper {
 
     public static String DB_NAME = "db_genealogy";
 
-    public static int VERSION = 7;
+    public static int VERSION = 8;
 
     public static final String CREATE_PERSON = "create table Person ("
             + "_id integer primary key autoincrement,"

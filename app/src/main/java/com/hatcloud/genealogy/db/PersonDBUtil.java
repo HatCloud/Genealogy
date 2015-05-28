@@ -272,6 +272,13 @@ public class PersonDBUtil {
         }
     }
 
+    public Cursor getRootPeople() {
+        Cursor cursor = db.query("Person", allColumn,"father_id=? and sex=?"
+                , new String[]{"0", "1"}
+                , null, null, null);
+        return cursor;
+    }
+
 
     /**
      * 因为应用中很多方法返回的都只是Cursor，不是具体的Person集合，

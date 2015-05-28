@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * Created by Jeff on 15/5/17.
  */
-public class PersonFamilyInfo extends Fragment {
+public class PersonFamilyInfoFragment extends Fragment {
 
     TextView tvFather;
     TextView tvMother;

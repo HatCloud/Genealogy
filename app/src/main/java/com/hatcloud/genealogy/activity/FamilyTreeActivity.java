@@ -1,5 +1,6 @@
 package com.hatcloud.genealogy.activity;
 
+import android.app.Fragment;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
@@ -7,81 +8,64 @@ import android.os.Bundle;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import android.view.MenuItem;
 
 import com.hatcloud.genealogy.R;
 import com.hatcloud.genealogy.db.PersonDBUtil;
+import com.hatcloud.genealogy.fragment.FamilyTreeFragment;
 import com.hatcloud.genealogy.model.Person;
 import com.hatcloud.genealogy.util.MyApplication;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 这是用于显示数据库中所有的信息的Activity
- * Created by Jeff on 15/5/14.
+ * Created by Jeff on 15/5/27.
  */
-public class AllInfoActivity extends BaseActivity {
+public class FamilyTreeActivity extends BaseActivity{
 
+    public List<Person> rootPeople;
+    public int tempId;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_all_info);
-        PersonDBUtil personDBUtil = PersonDBUtil.getIntance(MyApplication.getContext());
-        ListView listView = (ListView) findViewById(R.id.listView);
-        List<HashMap<String, String>> data = new ArrayList<>();
-        List<Person> people = PersonDBUtil.cursorToPeople(personDBUtil.getAllPeople());
+    protected void onCreate(Bundle bundle) {
+        super.onCreate(bundle);
+        setContentView(R.layout.activity_family_tree);
 
-
+        PersonDBUtil personDBUtil = PersonDBUtil.getIntance(this);
         //personDBUtil.deleteAll();
-        importTestData();
+        //importTestData();
 
-        for (Person person : people) {
-            HashMap<String, String> p = new HashMap<>();
-            String sex = person.getSex() == 1 ? "男" : "女";
-            p.put("id", String.valueOf(person.getId()));
-            p.put("name", person.getName());
-            p.put("age",String.valueOf(person.getAge()));
-            p.put("sex", sex);
-            p.put("father_id", String.valueOf(person.getFatherId()));
-            p.put("mother_id", String.valueOf(person.getMotherId()));
-            data.add(p);
+        int rootPersonId = getIntent().getExtras().getInt("id", 0);
+        tempId = getIntent().getExtras().getInt("temp_id", 0);
+
+        for (Person p : personDBUtil.cursorToPeople(personDBUtil.getRootPeople())) {
+            if (rootPersonId == p.getId()) {
+                rootPersonId = 0;
+                break;
+            }
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(AllInfoActivity.this, data,
-                R.layout.item_all_info,
-                new String[] { "id", "name", "age", "sex", "family_id", "parent_id" },
-                new int[] {R.id.id, R.id.name, R.id.age, R.id.sex, R.id.familyId, R.id.parentId });
-
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new ItemClickListener());
-    }
-
-    public void onClickAddItem(View view) {
-        Intent i = new Intent(this, FamilyTreeActivity.class);
-        startActivity(i);
-    }
-
-    private class ItemClickListener implements android.widget.AdapterView.OnItemClickListener {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ListView listView = (ListView) parent;
-            HashMap<String, Object> data = (HashMap<String, Object>) listView.getItemAtPosition(position);
-            String personid = data.get("id").toString();
-            PersonInfoActivity.actionStart(AllInfoActivity.this, personid);
+        if (rootPersonId == 0) {
+            rootPeople = personDBUtil.cursorToPeople(personDBUtil.getRootPeople());
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        } else {
+            rootPeople = new ArrayList<>();
+            rootPeople.add(personDBUtil.find(rootPersonId));
+            getSupportActionBar().setElevation(0);
+            getSupportActionBar().setTitle(personDBUtil.find(rootPersonId).getNodeName());
+            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+
+
+
+
+        Fragment fragment = new FamilyTreeFragment();
+        getFragmentManager().beginTransaction().replace(R.id.fragment, fragment).commit();
     }
 
     @Override
-
-    public
-    boolean
-    onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_actionbar, menu);
 
@@ -94,7 +78,7 @@ public class AllInfoActivity extends BaseActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 //start the search intent
-                Intent searchIntent = new Intent(AllInfoActivity.this, SearchResultsActivity.class);
+                Intent searchIntent = new Intent(FamilyTreeActivity.this, SearchResultsActivity.class);
                 searchIntent.setAction(Intent.ACTION_SEARCH);
                 searchIntent.putExtra(SearchManager.QUERY, query);
                 startActivity(searchIntent);
@@ -111,7 +95,45 @@ public class AllInfoActivity extends BaseActivity {
 
     }
 
+    /*@Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (rootPeople.size() > 1) {
+                    break;
+                }
+                PersonDBUtil personDBUtil = PersonDBUtil.getIntance(this);
+                Person person = rootPeople.get(0);
+                int tempID = person.getId();
+                for (int i = 0; i < 4; i++) {
+                    if (person.getFatherId() > 0) {
+                        person = personDBUtil.find(person.getFatherId());
+                    } else {
+                        return true;
+                    }
+                }
+                actionStart(this, person.getId(), tempID);
+                break;
+        }
+        return true;
+    }*/
 
+    public List<Person> getRootPeople() {
+        return rootPeople;
+    }
+
+
+    public int getTempId() {
+        return tempId;
+    }
+
+    public static void actionStart(Context context, int id, int tempID) {
+        Intent intent = new Intent(context, FamilyTreeActivity.class);
+        intent.putExtra("id", id);
+        intent.putExtra("temp_id", tempID);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(intent);
+    }
 
     private void importTestData() {
         PersonDBUtil personDBUtil = PersonDBUtil.getIntance(MyApplication.getContext());
@@ -223,4 +245,5 @@ public class AllInfoActivity extends BaseActivity {
         personDBUtil.save(person);
 
     }
+
 }

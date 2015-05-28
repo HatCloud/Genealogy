@@ -8,10 +8,9 @@ import android.support.v4.view.ViewPager;
 
 import com.hatcloud.genealogy.R;
 import com.hatcloud.genealogy.db.PersonDBUtil;
-import com.hatcloud.genealogy.fragment.PersonFamilyInfo;
-import com.hatcloud.genealogy.fragment.PersonGeneralInfo;
-import com.hatcloud.genealogy.fragment.PersonOperate;
-import android.support.v7.widget.Toolbar;
+import com.hatcloud.genealogy.fragment.PersonFamilyInfoFragment;
+import com.hatcloud.genealogy.fragment.PersonGeneralInfoFragment;
+import com.hatcloud.genealogy.fragment.PersonOperateFragment;
 
 import com.hatcloud.genealogy.model.Person;
 import com.hatcloud.genealogy.util.MyApplication;
@@ -37,13 +36,13 @@ public class PersonInfoActivity extends BaseActivity {
         person = personDBUtil.find(id);
 
         getSupportActionBar().setElevation(0);
-        getSupportActionBar().setTitle(person.getName());
+        getSupportActionBar().setTitle(person.getNodeName());
 
 
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), FragmentPagerItems.with(this)
-                .add(R.string.general, PersonGeneralInfo.class)
-                .add(R.string.family, PersonFamilyInfo.class)
-                .add(R.string.operate, PersonOperate.class)
+                .add(R.string.general, PersonGeneralInfoFragment.class)
+                .add(R.string.family, PersonFamilyInfoFragment.class)
+                .add(R.string.operate, PersonOperateFragment.class)
                 .create());
 
 

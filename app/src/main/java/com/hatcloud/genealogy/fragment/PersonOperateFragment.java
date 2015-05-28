@@ -19,7 +19,7 @@ import com.hatcloud.genealogy.util.MyApplication;
 /**
  * Created by Jeff on 15/5/17.
  */
-public class PersonOperate extends Fragment {
+public class PersonOperateFragment extends Fragment {
 
     Button btnDelete;
 

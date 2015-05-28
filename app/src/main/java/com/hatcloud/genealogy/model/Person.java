@@ -176,6 +176,14 @@ public class Person {
         return name;
     }
 
+    public String getNodeName() {
+        if (StrUtil.isEmpty(deathDate)) {
+            return name;
+        } else {
+            return respectableName;
+        }
+    }
+
     public int getSex() {
         return sex;
     }
@@ -329,28 +337,11 @@ public class Person {
 
         Person person = (Person) o;
 
-        if (familyHierarchyPosition != person.familyHierarchyPosition) return false;
         if (familyOrder != person.familyOrder) return false;
-        if (fatherId != person.fatherId) return false;
-        if (id != person.id) return false;
-        if (motherId != person.motherId) return false;
         if (sex != person.sex) return false;
         if (!birthDate.equals(person.birthDate)) return false;
-        if (deathDate != null ? !deathDate.equals(person.deathDate) : person.deathDate != null)
-            return false;
         if (!firstName.equals(person.firstName)) return false;
-        if (haoName != null ? !haoName.equals(person.haoName) : person.haoName != null)
-            return false;
         if (!lastName.equals(person.lastName)) return false;
-        if (name != null ? !name.equals(person.name) : person.name != null) return false;
-        if (respectableName != null ? !respectableName.equals(person.respectableName) : person.respectableName != null)
-            return false;
-        if (spouseIds != null ? !spouseIds.equals(person.spouseIds) : person.spouseIds != null)
-            return false;
-        if (styleName != null ? !styleName.equals(person.styleName) : person.styleName != null)
-            return false;
-        if (usedName != null ? !usedName.equals(person.usedName) : person.usedName != null)
-            return false;
 
         return true;
     }

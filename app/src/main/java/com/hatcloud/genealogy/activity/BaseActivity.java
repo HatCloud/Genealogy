@@ -22,6 +22,7 @@ public class BaseActivity extends AppCompatActivity {
 
         //使所有继承此类的活动在创建的时候就加入ActivityCollector中，方便统一管理
         ActivityCollector.addActivity(this);
+
     }
 
     @Override
