@@ -15,15 +15,6 @@
         />
 
     <TextView
-        android:id="@+id/sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="男"
-        style="@style/NormalPlusText"
-        />
-
-    <TextView
         android:id="@+id/birth_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

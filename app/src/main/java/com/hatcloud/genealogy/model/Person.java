@@ -1,13 +1,18 @@
 package com.hatcloud.genealogy.model;
 
+import android.database.Cursor;
 import android.text.TextUtils;
 
+import com.hatcloud.genealogy.db.PersonDBUtil;
+import com.hatcloud.genealogy.util.MyApplication;
 import com.hatcloud.genealogy.util.StrUtil;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Jeff on 15/5/13.
@@ -94,6 +99,11 @@ public class Person {
     private String deathDate;
 
     /**
+     * 生平
+     */
+    private String lifeInfo;
+
+    /**
      * 由姓和名组合的完整名字
      */
     private String name;
@@ -118,7 +128,7 @@ public class Person {
     public Person(int id, String lastName, String firstName, String usedName,
                   String styleName, String haoName, int sex, int familyHierarchyPosition,
                   int fatherId, int motherId, String spouseIds, int familyOrder,
-                  String birthDate, String deathDate) {
+                  String birthDate, String deathDate, String lifeInfo) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -133,6 +143,7 @@ public class Person {
         this.familyOrder = familyOrder;
         this.birthDate = birthDate;
         this.deathDate = deathDate;
+        this.lifeInfo = lifeInfo;
         this.name = lastName + firstName;
         this.respectableName = firstName + "公";
     }
@@ -177,7 +188,7 @@ public class Person {
     }
 
     public String getNodeName() {
-        if (StrUtil.isEmpty(deathDate)) {
+        if (StrUtil.isEmpty(deathDate) || sex == 2) {
             return name;
         } else {
             return respectableName;
@@ -199,6 +210,9 @@ public class Person {
     }
 
     public String getBirthDate() {
+        if(StrUtil.isEmpty(birthDate)){
+            return "";
+        }
         return birthDate;
     }
 
@@ -242,7 +256,23 @@ public class Person {
     }
 
     public String getSpouseIds() {
+        if (spouseIds == null) {
+            return "";
+        }
         return spouseIds;
+    }
+
+    public List<Integer> getIntSpouseIds() {
+        List<Integer> ids = new ArrayList<>();
+        String[] strIds = spouseIds.split(",");
+
+        for (String str : strIds) {
+            if(!StrUtil.isEmpty(str)) {
+                ids.add(Integer.valueOf(str));
+            }
+        }
+
+        return ids;
     }
 
     public int getFamilyOrder() {
@@ -315,6 +345,14 @@ public class Person {
 
     public void setRespectableName(String respectableName) {
         this.respectableName = respectableName;
+    }
+
+    public String getLifeInfo() {
+        return lifeInfo;
+    }
+
+    public void setLifeInfo(String lifeInfo) {
+        this.lifeInfo = lifeInfo;
     }
 
     @Override

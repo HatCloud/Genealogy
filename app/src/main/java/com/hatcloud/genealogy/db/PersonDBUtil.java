@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.hatcloud.genealogy.model.Person;
+import com.hatcloud.genealogy.util.MyApplication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +20,7 @@ public class PersonDBUtil {
     private String[] allColumn = new String[]{
             "_id", "last_name", "first_name", "name", "used_name", "style_name",
             "hao_name", "sex", "family_hierarchy_position", "father_id",
-            "mother_id", "spouse_ids", "family_order", "birth_date", "death_date"};
+            "mother_id", "spouse_ids", "family_order", "birth_date", "death_date", "life_info"};
 
 
     public static final int ID = 0;
@@ -51,6 +52,8 @@ public class PersonDBUtil {
     public static final int BIRTH_DATE = 13;
 
     public static final int DEATH_DATE = 14;
+
+    public static final int LIFE_INFO = 15;
 
     private static PersonDBUtil personDBUtil;
 
@@ -102,6 +105,7 @@ public class PersonDBUtil {
             values.put("family_order", person.getFamilyOrder());
             values.put("birth_date", person.getBirthDate());
             values.put("death_date", person.getDeathDate());
+            values.put("life_info", person.getLifeInfo());
             db.insert("Person", null, values);
         }
     }
@@ -127,6 +131,7 @@ public class PersonDBUtil {
             values.put("family_order", person.getFamilyOrder());
             values.put("birth_date", person.getBirthDate());
             values.put("death_date", person.getDeathDate());
+            values.put("life_info", person.getLifeInfo());
             db.update("Person", values, "_id=?", new String[]{String.valueOf(person.getId())});
         }
     }
@@ -181,7 +186,8 @@ public class PersonDBUtil {
                     cursor.getString(SPOUSE_IDS),
                     cursor.getInt(FAMILY_ORDER),
                     cursor.getString(BIRTH_DATE),
-                    cursor.getString(DEATH_DATE));
+                    cursor.getString(DEATH_DATE),
+                    cursor.getString(LIFE_INFO));
         }
         return null;
     }
@@ -198,6 +204,17 @@ public class PersonDBUtil {
                 null,null,null);
     }
 
+
+    public List<Person> getSpouse(Person person) {
+        List<Person> spouses = new ArrayList<>();
+        List<Integer> ids = person.getIntSpouseIds();
+
+        for (int i : ids) {
+            spouses.add(find(i));
+        }
+
+        return spouses;
+    }
 
     /**
      * 查找某人的孩子们
@@ -302,7 +319,8 @@ public class PersonDBUtil {
                     cursor.getString(SPOUSE_IDS),
                     cursor.getInt(FAMILY_ORDER),
                     cursor.getString(BIRTH_DATE),
-                    cursor.getString(DEATH_DATE));
+                    cursor.getString(DEATH_DATE),
+                    cursor.getString(LIFE_INFO));
             people.add(person);
         }
         return people;

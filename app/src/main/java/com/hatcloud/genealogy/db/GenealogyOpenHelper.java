@@ -12,7 +12,7 @@ public class GenealogyOpenHelper extends SQLiteOpenHelper {
 
     public static String DB_NAME = "db_genealogy";
 
-    public static int VERSION = 8;
+    public static int VERSION = 9;
 
     public static final String CREATE_PERSON = "create table Person ("
             + "_id integer primary key autoincrement,"
@@ -29,7 +29,8 @@ public class GenealogyOpenHelper extends SQLiteOpenHelper {
             + "spouse_ids text,"     //配偶们
             + "family_order int not null,"    //家中排号
             + "birth_date text not null,"    //出生日期
-            + "death_date text)";   //死亡日期
+            + "death_date text,"   //死亡日期
+            + "life_info text)";   //生平
 
 
     public GenealogyOpenHelper(Context context) {

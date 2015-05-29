@@ -10,7 +10,7 @@ import com.hatcloud.genealogy.R;
 import com.hatcloud.genealogy.db.PersonDBUtil;
 import com.hatcloud.genealogy.fragment.PersonFamilyInfoFragment;
 import com.hatcloud.genealogy.fragment.PersonGeneralInfoFragment;
-import com.hatcloud.genealogy.fragment.PersonOperateFragment;
+import com.hatcloud.genealogy.fragment.PersonLifeInfoFragment;
 
 import com.hatcloud.genealogy.model.Person;
 import com.hatcloud.genealogy.util.MyApplication;
@@ -42,7 +42,7 @@ public class PersonInfoActivity extends BaseActivity {
         FragmentPagerItemAdapter adapter = new FragmentPagerItemAdapter(getSupportFragmentManager(), FragmentPagerItems.with(this)
                 .add(R.string.general, PersonGeneralInfoFragment.class)
                 .add(R.string.family, PersonFamilyInfoFragment.class)
-                .add(R.string.operate, PersonOperateFragment.class)
+                .add(R.string.life_info, PersonLifeInfoFragment.class)
                 .create());
 
 

@@ -31,6 +31,7 @@ public class FamilyTreeActivity extends BaseActivity{
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.activity_family_tree);
+        getSupportActionBar().setElevation(0);
 
         PersonDBUtil personDBUtil = PersonDBUtil.getIntance(this);
         //personDBUtil.deleteAll();
@@ -48,16 +49,14 @@ public class FamilyTreeActivity extends BaseActivity{
 
         if (rootPersonId == 0) {
             rootPeople = personDBUtil.cursorToPeople(personDBUtil.getRootPeople());
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         } else {
             rootPeople = new ArrayList<>();
             rootPeople.add(personDBUtil.find(rootPersonId));
-            getSupportActionBar().setElevation(0);
+
             getSupportActionBar().setTitle(personDBUtil.find(rootPersonId).getNodeName());
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
-
 
 
         Fragment fragment = new FamilyTreeFragment();
@@ -95,28 +94,15 @@ public class FamilyTreeActivity extends BaseActivity{
 
     }
 
-    /*@Override
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                if (rootPeople.size() > 1) {
-                    break;
-                }
-                PersonDBUtil personDBUtil = PersonDBUtil.getIntance(this);
-                Person person = rootPeople.get(0);
-                int tempID = person.getId();
-                for (int i = 0; i < 4; i++) {
-                    if (person.getFatherId() > 0) {
-                        person = personDBUtil.find(person.getFatherId());
-                    } else {
-                        return true;
-                    }
-                }
-                actionStart(this, person.getId(), tempID);
+                onBackPressed();
                 break;
         }
         return true;
-    }*/
+    }
 
     public List<Person> getRootPeople() {
         return rootPeople;
@@ -151,9 +137,11 @@ public class FamilyTreeActivity extends BaseActivity{
         person.setStyleName("子路");
         person.setHaoName("清远");
         person.setFamilyHierarchyPosition(134);
-        for(Person p : PersonDBUtil.cursorToPeople(personDBUtil.queryByName("马氏"))){
-            person.setSpouseIds(person.getSpouseIds() + "" + p.getId());
-        }
+        person.setSpouseIds("" + PersonDBUtil.cursorToPeople(personDBUtil.queryByName("马氏")).get(0).getId());
+        person.setSpouseIds(person.getSpouseIds() + "," +
+                PersonDBUtil.cursorToPeople(personDBUtil.queryByName("刘氏")).get(0).getId());
+        person.setLifeInfo("歐陽修，字永叔，宋朝吉州廬陵〈今江西省吉安縣〉人，生於真宗景德四年六月二\n" +
+                "十四日，卒於神宗熙寧五年七月二十三日，享年六十六歲。");
         personDBUtil.save(person);
 
         person = new Person("田", "巨源", 1, 1, "1766-12-5");

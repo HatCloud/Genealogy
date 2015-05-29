@@ -6,11 +6,13 @@
     style="@style/PagePadding"
     >
 
-    <Button
+    <TextView
+        android:id="@+id/person_life_info"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btn_delete_person"
-        android:text="@string/delete"
+        android:layout_height="match_parent"
+        android:padding="@dimen/space"
+        android:textSize="@dimen/text_normal"
+        android:text="无"
         />
 
 </LinearLayout>

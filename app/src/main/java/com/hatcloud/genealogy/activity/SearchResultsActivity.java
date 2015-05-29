@@ -58,7 +58,7 @@ public class SearchResultsActivity extends Activity {
             }
 
             SimpleAdapter adapter = new SimpleAdapter(SearchResultsActivity.this, data,
-                    R.layout.item_all_info,
+                    R.layout.item_children,
                     new String[] { "name", "sex", "birth_date" },
                     new int[] {R.id.name, R.id.sex, R.id.birth_date});
             lvSearchResult.setAdapter(adapter);
@@ -71,8 +71,9 @@ public class SearchResultsActivity extends Activity {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             ListView listView = (ListView) parent;
             HashMap<String, Object> data = (HashMap<String, Object>) listView.getItemAtPosition(position);
-            String personid = data.get("id").toString();
-            PersonInfoActivity.actionStart(SearchResultsActivity.this, personid);
+
+            //String personid = data.get("id").toString();
+            FamilyTreeActivity.actionStart(SearchResultsActivity.this, Integer.valueOf(data.get("id").toString()),0);
         }
     }
 }

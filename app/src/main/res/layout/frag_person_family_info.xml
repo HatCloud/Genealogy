@@ -3,89 +3,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    style="@style/PagePadding"
-    >
+    style="@style/PagePadding">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/father_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/father"
             style="@style/NormalText"
             />
 
-
         <TextView
             android:id="@+id/father"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/space"
-            android:clickable="true"
-            style="@style/NormalText"
+            android:layout_toRightOf="@+id/father_title"
+            android:layout_alignBaseline="@+id/father_title"
+            android:paddingLeft="@dimen/normal_padding"
+            android:text="父亲"
+            style="@style/NormalPlusText"
             />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <LinearLayout
-        android:paddingTop="@dimen/normal_padding"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="bottom"
-        >
+        android:paddingTop="@dimen/normal_padding">
 
         <TextView
+            android:id="@+id/mother_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/mother"
             style="@style/NormalText"
             />
 
-
         <TextView
             android:id="@+id/mother"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/space"
-            android:clickable="true"
+            android:layout_toRightOf="@+id/mother_title"
+            android:layout_alignBaseline="@+id/mother_title"
+            android:paddingLeft="@dimen/normal_padding"
+            android:text="母亲"
+            style="@style/NormalPlusText"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/normal_padding">
+
+        <TextView
+            android:id="@+id/spouses_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spouse"
             style="@style/NormalText"
             />
 
-    </LinearLayout>
+        <ListView
+            android:id="@+id/spouses"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/spouses_title"
+            android:dividerHeight="1dp"
+            android:scrollbarFadeDuration="0"
+            android:fadeScrollbars="false"
+            android:paddingLeft="@dimen/normal_padding"
+            android:paddingTop="@dimen/space"
+            />
 
-    <LinearLayout
-        android:paddingTop="@dimen/lager_padding"
-        android:layout_width="match_parent"
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="bottom"
-        >
+        android:paddingTop="@dimen/normal_padding">
 
         <TextView
+            android:id="@+id/children_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/children"
-            android:clickable="true"
-            style="@style/LagerText"
+            style="@style/NormalText"
             />
-
 
         <ListView
             android:id="@+id/children"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/space"
-            android:clickable="true"
+            android:layout_below="@+id/children_title"
+            android:dividerHeight="1dp"
+            android:scrollbarFadeDuration="0"
+            android:fadeScrollbars="false"
+            android:paddingLeft="@dimen/normal_padding"
+            android:paddingTop="@dimen/space"
             />
 
-    </LinearLayout>
-
-
+    </RelativeLayout>
 
 </LinearLayout>

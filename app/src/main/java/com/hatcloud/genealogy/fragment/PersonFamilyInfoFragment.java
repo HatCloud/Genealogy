@@ -29,6 +29,8 @@ public class PersonFamilyInfoFragment extends Fragment {
 
     TextView tvFather;
     TextView tvMother;
+    TextView tvSpousesTitle;
+    ListView lvSpouses;
     ListView lvChildren;
 
 
@@ -41,8 +43,8 @@ public class PersonFamilyInfoFragment extends Fragment {
         final Person person = ((PersonInfoActivity) getActivity()).getPerson();
         final Person father = personDBUtil.getFather(person);
         final Person mother = personDBUtil.getMother(person);
-        String fatherName = "未知";
-        String motherName = "未知";
+        String fatherName = "佚名";
+        String motherName = "佚名";
 
         tvFather = (TextView) view.findViewById(R.id.father);
         if (father != null) {
@@ -83,10 +85,9 @@ public class PersonFamilyInfoFragment extends Fragment {
 
         for (Person child : children) {
             HashMap<String, String> p = new HashMap<>();
-            String sex = child.getSex() == 1 ? "男" : "女";
             p.put("id", String.valueOf(child.getId()));
             p.put("name", child.getName());
-            p.put("sex", sex);
+            p.put("sex", child.getSexStr());
             p.put("birth_date", child.getBirthDate());
             data.add(p);
         }
@@ -98,6 +99,32 @@ public class PersonFamilyInfoFragment extends Fragment {
 
         lvChildren.setAdapter(adapter);
         lvChildren.setOnItemClickListener(new ItemClickListener());
+
+        lvSpouses = (ListView) view.findViewById(R.id.spouses);
+        tvSpousesTitle = (TextView) view.findViewById(R.id.spouses_title);
+        if (person.getSex() == 1) {
+            tvSpousesTitle.setText("妻子");
+        } else if (person.getSex() == 1){
+            tvSpousesTitle.setText("丈夫");
+        }
+        data = new ArrayList<>();
+        List<Person> spouses = personDBUtil.getSpouse(person);
+
+        for (Person spouse : spouses) {
+            HashMap<String, String> p = new HashMap<>();
+            p.put("id", String.valueOf(spouse.getId()));
+            p.put("name", spouse.getName());
+            p.put("birth_date", spouse.getBirthDate());
+            data.add(p);
+        }
+
+        adapter = new SimpleAdapter(MyApplication.getContext(), data,
+                R.layout.item_spouses,
+                new String[] { "name", "birth_date" },
+                new int[] {R.id.name, R.id.birth_date});
+
+        lvSpouses.setAdapter(adapter);
+        lvSpouses.setOnItemClickListener(new ItemClickListener());
 
         return view;
     }

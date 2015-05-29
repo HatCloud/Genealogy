@@ -5,22 +5,30 @@
     <string name="general">简介</string>
     <string name="family">家庭</string>
     <string name="operate">操作</string>
+    <string name="life_info">生平</string>
 
     <!--frag_person_general_info-->
     <string name="name">姓名</string>
+    <string name="used_name">曾用名</string>
+    <string name="style_name">字</string>
+    <string name="hao_name">号</string>
+    <string name="family_hierarchy_position">辈分</string>
+    <string name="family_order">排行</string>
     <string name="sex">性别</string>
     <string name="birth_to_death">生卒年</string>
+    <string name="birth_date">出生日期</string>
+    <string name="death_date">死亡日期</string>
     <string name="age">年龄</string>
-    <string name="life">生平</string>
+    <string name="death_age">享年</string>
 
     <!--frag_person_family_info-->
     <string name="father">父亲</string>
     <string name="mother">母亲</string>
     <string name="children">孩子</string>
+    <string name="spouse">配偶</string>
+    <string name="wife">妻子</string>
+    <string name="husband">丈夫</string>
 
-    <!--frag_person_operate-->
-    <string name="set_me">这是我</string>
-    <string name="delete">删除</string>
 
     <string name="kongzi">孔子（前551～前479），名丘，字仲尼，春秋末期鲁国陬邑(今山东曲阜市东南)人。我国古代著名的思想家、教育家、儒家学派创始人。相传有弟子三千，贤弟子七十二人，孔子曾带领弟子周游列国十四年。晚年潜心致力于古文献整理，修《诗》《书》，定《礼》《乐》，序《周易》，作《春秋》。其思想以“仁”为核心，“仁”即“爱人”，倡导推行“仁政”，且应以“礼”为规范，“克己复礼为仁”；提出“正名”主张，以为“君君、臣臣、父父、子子”，都应实副其“名”；注重“学”与“思”的结合，所谓“学而不思则罔，思而不学则殆”；首创私人讲学风气，主张因材施教，“有教无类”，“学而不厌，诲人不倦”，强调“君子学道则爱人，小人学道则易使也”。自西汉以后，孔子学说成为两千余年封建社会的文化正统，影响极其深远。现存《论语》一书，记载有孔子与门人的问答，是研究孔子学说的主要资料。</string>
 

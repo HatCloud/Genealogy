@@ -3,20 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<TextView
-        android:padding="8dp"
-        android:textSize="16sp"
-        android:text="Last Clicked:"
-        android:layout_alignParentTop="true"
-        android:background="@android:color/holo_blue_dark"
-        android:id="@+id/status_bar"
+    <LinearLayout
+        android:id="@+id/btn_operate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />-->
+        android:layout_height="@dimen/widget_height"
+        android:background="@color/primary">
+
+        <Button
+            android:id="@+id/btn_up_one_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="0dp"
+            android:background="@color/primary"
+            android:text="上一辈" />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/btn_operate"
         />
 
 
